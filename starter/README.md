@@ -55,7 +55,7 @@ end before the session.
 
 ## Requirements
 
-- **Shopify CLI 3.90.0+** (`shopify version`).
+- **Shopify CLI 4+** (`shopify version`).
 - Node.js (see `engines` in `package.json`) and npm.
 - A **development store with Sidekick** enabled, and a Partner org you can create
   an app in.
