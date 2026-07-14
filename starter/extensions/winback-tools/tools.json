@@ -1,0 +1,11 @@
+[
+  {
+    "$schema": "https://extensions.shopifycdn.com/shopifycloud/schemas/v1/tool.json",
+    "name": "placeholder",
+    "description": "Placeholder tool. Replace with find_lapsed_customers in Build 1, Step 1 (see prompts/01-expose-data-extension.md).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    }
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "name": "winback-tools",
+  "private": true,
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@shopify/ui-extensions": "^2026.7.x"
+  }
+}

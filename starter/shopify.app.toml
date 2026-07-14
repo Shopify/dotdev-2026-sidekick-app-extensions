@@ -1,0 +1,40 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+# Placeholder client_id — running `shopify app dev` will prompt you to link
+# this to an app in your Partner org. If linking is blocked, run
+# `shopify app dev --reset`.
+client_id = "00000000000000000000000000000000"
+name = "sidekick-winback-workshop"
+application_url = "https://shopify.dev/apps/default-app-home"
+embedded = true
+
+# REQUIRED for any app with Sidekick-eligible extensions. Sidekick uses this
+# app-level summary to decide whether a merchant's question should route to
+# this app at all. This starter value is deliberately VAGUE — Build 1, Step 2 of the
+# workshop rewrites it to name the actions (find/create) and the domain
+# (lapsed customers, win-back email campaigns). 256-token limit.
+[sidekick]
+extensions_summary = "Tools for this app."
+
+[access_scopes]
+# The workshop app serves its data from its own backend (app/data/*), so it
+# needs no Admin API scopes. Add scopes here if your own app calls the Admin API.
+scopes = ""
+
+[webhooks]
+api_version = "2026-07"
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/uninstalled"
+  topics = [ "app/uninstalled" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/scopes_update"
+  topics = [ "app/scopes_update" ]
+
+[auth]
+redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
+
+[build]
+automatically_update_urls_on_dev = true
+include_config_on_deploy = true

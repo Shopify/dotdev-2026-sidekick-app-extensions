@@ -1,0 +1,17 @@
+api_version = "2025-10"
+
+[[extensions]]
+# Change the merchant-facing name of the extension in locales/en.default.json
+name = "t:name"
+handle = "winback-tools"
+type = "ui_extension"
+uid = "4d455331-4620-428e-c7e0-a7ad548fde8d2f93be2c"
+# Build 1 (Step 2) tightens this description so Sidekick knows when to
+# use the tool. Keep it vague for now — that's part of the lesson.
+description = "Tools for this app"
+
+[[extensions.targeting]]
+module = "./src/index.js"
+target = "admin.app.tools.data"
+tools = "./tools.json"
+instructions = "./instructions.md"

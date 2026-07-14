@@ -1,0 +1,100 @@
+[
+  {
+    "id": 5000001,
+    "name": "Spring restock announcement",
+    "emailContent": {
+      "subject": "Fresh arrivals just dropped 🌱",
+      "previewText": "New season, new favorites — see what's back in stock.",
+      "body": "Hi there,\n\nWe just restocked your favorites and added a few new pieces we think you'll love. Come take a look.\n\n— The team"
+    },
+    "status": "SENT",
+    "customerIds": [
+      1000001,
+      1000002,
+      1000003,
+      1000004,
+      1000005,
+      1000006,
+      1000007,
+      1000008,
+      1000009,
+      1000010,
+      1000011,
+      1000012,
+      1000013,
+      1000014,
+      1000015,
+      1000016,
+      1000017,
+      1000018,
+      1000019,
+      1000020,
+      1000021,
+      1000022,
+      1000023,
+      1000024,
+      1000025,
+      1000026,
+      1000027,
+      1000028,
+      1000029,
+      1000030,
+      1000031,
+      1000032,
+      1000033,
+      1000034,
+      1000035,
+      1000036,
+      1000037,
+      1000038,
+      1000039,
+      1000040
+    ],
+    "createdAt": "2026-03-14T09:00:00.000Z"
+  },
+  {
+    "id": 5000002,
+    "name": "VIP early access",
+    "emailContent": {
+      "subject": "You're on the list ✨",
+      "previewText": "24 hours before everyone else.",
+      "body": "Hi there,\n\nAs one of our best customers, you get first access to the new collection. Shop now before it opens to everyone.\n\n— The team"
+    },
+    "status": "DRAFT",
+    "customerIds": [
+      1000001,
+      1000002,
+      1000003,
+      1000004,
+      1000005,
+      1000006,
+      1000007,
+      1000008,
+      1000009,
+      1000010,
+      1000011,
+      1000012,
+      1000013,
+      1000014,
+      1000015,
+      1000016,
+      1000017,
+      1000018,
+      1000019,
+      1000020
+    ],
+    "createdAt": "2026-05-02T15:30:00.000Z"
+  },
+  {
+    "id": 5000003,
+    "name": "Summer sale preview",
+    "emailContent": {
+      "subject": "A sunny sale is coming soon ☀️",
+      "previewText": "Get ready for seasonal favorites at special prices.",
+      "body": "Hi there,\n\nOur summer sale starts soon, and we wanted to give you an early look at the seasonal favorites that will be included.\n\n— The team"
+    },
+    "status": "DRAFT",
+    "customerIds": [],
+    "createdAt": "2026-06-20T11:00:00.000Z"
+  }
+]

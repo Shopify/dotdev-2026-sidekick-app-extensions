@@ -1,0 +1,28 @@
+# Local/dev state
+**/.shopify/
+**/.shopify.lock
+**/.env
+**/.env.*
+
+# Dependencies
+**/node_modules/
+
+# Build outputs
+**/dist/
+**/build/
+**/coverage/
+**/.react-router/
+
+# Generated function/extension types
+**/generated/
+
+# Local SQLite (Prisma session storage)
+**/prisma/dev.sqlite
+**/prisma/dev.sqlite-journal
+
+# Logs / OS
+*.log
+.DS_Store
+
+# Shopify CLI local named configs created by `shopify app dev --reset`
+**/shopify.app.*.toml
