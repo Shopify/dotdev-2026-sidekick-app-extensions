@@ -34,7 +34,6 @@ export default function CampaignForm({
   enableDesignTool = false,
 }) {
   const fetcher = useFetcher();
-  const navigate = useNavigate();
   const shopify = useAppBridge();
 
   const initialState = useMemo(() => stateFromCampaign(campaign), [campaign]);
@@ -69,10 +68,10 @@ export default function CampaignForm({
         shopify.toast.show(fetcher.data.error, { isError: true });
       }
     }
-  }, [fetcher.state, fetcher.data, navigate, shopify, successMessage]);
+  }, [fetcher.state, fetcher.data, shopify, successMessage]);
 
   useEffect(() => {
-    if (!enableDesignTool) return undefined;
+    if (!enableDesignTool) return;
 
     // BUILD 2 — WIRE THE ACTION (see prompts/04-compose-into-action.md)
     // Register a `design_email` Sidekick tool so Sidekick can STAGE subject /
@@ -86,7 +85,6 @@ export default function CampaignForm({
     //   return { ok: true, note: "Staged in the form. Awaiting merchant Save." };
     // });
     // return () => cleanup?.();
-    return undefined;
   }, [enableDesignTool, shopify]);
 
   // The "Send" button is intentionally INERT in this workshop app — there's no

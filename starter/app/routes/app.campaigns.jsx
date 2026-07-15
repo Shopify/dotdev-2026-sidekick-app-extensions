@@ -14,12 +14,10 @@ export default function Campaigns() {
 
   return (
     <s-page heading="Campaigns">
+      <s-button slot="primary-action" variant="primary" href="/app/campaigns/new">
+        Create campaign
+      </s-button>
       <s-section heading={`${campaigns.length} email campaigns`}>
-        <s-stack direction="block" gap="base">
-          <s-link>
-            <Link to="/app/campaigns/new">Create campaign</Link>
-          </s-link>
-        </s-stack>
         <s-table>
           <s-table-header-row>
             <s-table-header>Name</s-table-header>
