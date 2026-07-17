@@ -1,0 +1,39 @@
+[[extensions]]
+name = "Edit campaign"
+description = "Edit a campaign so the merchant can review and send it."
+handle = "edit-campaign"
+type = "admin_link"
+
+# For embedded apps, the url is relative to the app's application_url.
+# The {id} placeholder is filled from the intent schema's value field via
+# mapTo = "param" / fieldName = "id" in edit-campaign.json.
+[[extensions.targeting]]
+target = "admin.app.intent.link"
+url = "/app/campaigns/{id}/edit"
+
+# Tools define what Sidekick can do once the editor page is open.
+# Required: an intent with no tools is not registered.
+tools = "./tools.json"
+instructions = "./instructions.md"
+
+[[extensions.targeting.intents]]
+type = "application/campaign"
+action = "edit"
+schema = "./edit-campaign.json"
+
+[[extensions]]
+name = "Create campaign"
+description = "Open the new campaign form so the merchant can draft, review, and create it."
+handle = "create-campaign"
+type = "admin_link"
+
+[[extensions.targeting]]
+target = "admin.app.intent.link"
+url = "/app/campaigns/new"
+tools = "./tools.json"
+instructions = "./instructions.md"
+
+[[extensions.targeting.intents]]
+type = "application/campaign"
+action = "create"
+schema = "./campaign-schema.json"

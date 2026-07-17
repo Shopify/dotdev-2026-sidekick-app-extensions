@@ -1,11 +1,137 @@
 [
   {
     "$schema": "https://extensions.shopifycdn.com/shopifycloud/schemas/v1/tool.json",
-    "name": "placeholder",
-    "description": "Placeholder tool. Replace with find_lapsed_customers in Build 1, Step 1 (see prompts/01-expose-data-extension.md).",
+    "name": "find_lapsed_customers",
+    "description": "Find customers who have not placed an order in a given number of days. Results are paginated.",
     "inputSchema": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "daysSinceLastOrder": {
+          "type": "number",
+          "description": "Optional minimum number of days since the customer's last order. Defaults to 90."
+        },
+        "page": {
+          "type": "number",
+          "description": "Optional 1-based page number to return. Defaults to 1."
+        },
+        "pageSize": {
+          "type": "number",
+          "description": "Optional number of customers per page. Defaults to 25 and is capped at 50."
+        }
+      }
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "days": {
+          "type": "number",
+          "description": "The days-since-last-order threshold used."
+        },
+        "count": {
+          "type": "number",
+          "description": "The total number of lapsed customers found across all pages."
+        },
+        "page": {
+          "type": "number",
+          "description": "The returned 1-based page number."
+        },
+        "pageSize": {
+          "type": "number",
+          "description": "The number of customers requested per page."
+        },
+        "totalPages": {
+          "type": "number",
+          "description": "The total number of pages available."
+        },
+        "hasNextPage": {
+          "type": "boolean",
+          "description": "Whether another page is available after this one."
+        },
+        "hasPreviousPage": {
+          "type": "boolean",
+          "description": "Whether another page is available before this one."
+        },
+        "customers": {
+          "type": "array",
+          "description": "The lapsed customers for the returned page.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "number" },
+              "name": { "type": "string" },
+              "email": { "type": "string" },
+              "phone": { "type": "string" },
+              "city": { "type": "string" },
+              "ordersCount": { "type": "number" },
+              "totalSpent": { "type": "number" },
+              "createdAt": { "type": "string" },
+              "lastOrderedAt": { "type": "string" },
+              "daysSinceOrder": { "type": "number" },
+              "notes": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "$schema": "https://extensions.shopifycdn.com/shopifycloud/schemas/v1/tool.json",
+    "name": "find_campaigns",
+    "description": "Find existing campaigns that can be opened for editing.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Optional campaign status filter."
+        },
+        "limit": {
+          "type": "number",
+          "description": "Optional maximum number of campaigns to return. Defaults to 10 and is capped at 25."
+        }
+      }
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "description": "Existing campaigns returned as resource links.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Always resource_link."
+              },
+              "uri": {
+                "type": "string",
+                "description": "Stable campaign URI: gid://application/campaign/<campaignId>."
+              },
+              "name": {
+                "type": "string",
+                "description": "Human-readable campaign name."
+              },
+              "mimeType": {
+                "type": "string",
+                "description": "Always application/campaign."
+              },
+              "_meta": {
+                "type": "object",
+                "description": "Compact campaign metadata.",
+                "properties": {
+                  "id": { "type": "string" },
+                  "status": { "type": "string" },
+                  "customerIds": {
+                    "type": "array",
+                    "items": { "type": "number" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 ]

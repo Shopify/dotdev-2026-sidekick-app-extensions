@@ -1,0 +1,25 @@
+{
+  "$schema": "https://extensions.shopifycdn.com/shopifycloud/schemas/v1/intent.json",
+  "inputSchema": {
+    "$ref": "https://extensions.shopifycdn.com/shopifycloud/schemas/v1/application/campaign.json",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Campaign name",
+        "maxLength": 200
+      },
+      "status": {
+        "type": "string",
+        "description": "Campaign status"
+      },
+      "customerIds": {
+        "type": "array",
+        "description": "Customer ids included in this campaign",
+        "items": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

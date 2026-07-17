@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useMemo, useState } from "react";
-import { useFetcher, useNavigate } from "react-router";
+import { useFetcher } from "react-router";
 import { useAppBridge } from "@shopify/app-bridge-react";
 
 function customerIdsFromText(value = "") {
@@ -25,33 +25,49 @@ function stateFromCampaign(campaign) {
   };
 }
 
+function stagedValuesFromIntentRequest(request) {
+  const data =
+    request?.data && typeof request.data === "object" ? request.data : request;
+
+  if (!data || typeof data !== "object") {
+    return {};
+  }
+
+  return {
+    ...(typeof data.name === "string" ? { name: data.name } : {}),
+    ...(Array.isArray(data.customerIds)
+      ? { customerIds: data.customerIds.join("\n") }
+      : {}),
+  };
+}
+
 export default function CampaignForm({
   campaign,
   actionPath,
   heading,
   saveLabel = "Save",
   successMessage = "Campaign saved (demo)",
-  enableDesignTool = false,
 }) {
   const fetcher = useFetcher();
   const shopify = useAppBridge();
 
-  const initialState = useMemo(() => stateFromCampaign(campaign), [campaign]);
-
-  // BUILD 2 — WIRE THE ACTION (see prompts/04-compose-into-action.md)
-  // TODO(Build 2): read the shopify.intents.request.value to get the campaign
-  // name, status and customerIds (if available) to update the staged values
-  const [staged, setStaged] = useState(initialState);
-  const [baseline, setBaseline] = useState(initialState);
+  const campaignState = useMemo(() => stateFromCampaign(campaign), [campaign]);
+  const [staged, setStaged] = useState(campaignState);
+  const [baseline, setBaseline] = useState(campaignState);
 
   const isSaving =
     ["loading", "submitting"].includes(fetcher.state) &&
     fetcher.formMethod === "POST";
 
   useEffect(() => {
-    setStaged(initialState);
-    setBaseline(initialState);
-  }, [initialState]);
+    console.log(shopify.intents.request.value);
+    const intentStagedValues = stagedValuesFromIntentRequest(
+      shopify.intents?.request?.value,
+    );
+
+    setStaged({ ...campaignState, ...intentStagedValues });
+    setBaseline(campaignState);
+  }, [campaignState, shopify]);
 
   useEffect(() => {
     if (fetcher.state === "idle" && fetcher.data) {
@@ -62,8 +78,7 @@ export default function CampaignForm({
           setBaseline(savedState);
         }
         shopify.toast.show(successMessage);
-        // BUILD 2 — WIRE THE ACTION (see prompts/04-compose-into-action.md)
-        // TODO(Build 2): call to shopify.intents.response?.ok() to resolve the current intent (if any)
+        shopify.intents?.response?.ok();
       } else {
         shopify.toast.show(fetcher.data.error, { isError: true });
       }
@@ -71,21 +86,16 @@ export default function CampaignForm({
   }, [fetcher.state, fetcher.data, shopify, successMessage]);
 
   useEffect(() => {
-    if (!enableDesignTool) return;
+    const cleanup = shopify.tools.register("design_email", async (input) => {
+      setStaged((prev) => ({ ...prev, ...input }));
+      return {
+        ok: true,
+        note: "Staged in the form. Awaiting merchant Create/Save.",
+      };
+    });
 
-    // BUILD 2 — WIRE THE ACTION (see prompts/04-compose-into-action.md)
-    // Register a `design_email` Sidekick tool so Sidekick can STAGE subject /
-    // previewText / body changes into the controlled `staged` state below.
-    // The merchant clicks Save — Sidekick never saves or sends silently.
-    //
-    // TODO(Build 2): implement the design_email registration below.
-    //
-    // const cleanup = shopify.tools.register("design_email", async (input) => {
-    //   setStaged((prev) => ({ ...prev, ...input }));
-    //   return { ok: true, note: "Staged in the form. Awaiting merchant Save." };
-    // });
-    // return () => cleanup?.();
-  }, [enableDesignTool, shopify]);
+    return () => cleanup?.();
+  }, [shopify]);
 
   // The "Send" button is intentionally INERT in this workshop app — there's no
   // real ESP wired up. It exists to make the merchant-in-the-loop send point
@@ -121,6 +131,12 @@ export default function CampaignForm({
           onReset={discard}
         >
           <s-stack direction="block" gap="base">
+            <input
+              type="hidden"
+              name="customerIds"
+              value={staged.customerIds}
+              readOnly
+            />
             <s-text-field
               label="Name"
               name="name"

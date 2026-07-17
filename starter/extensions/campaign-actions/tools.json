@@ -1,0 +1,26 @@
+[
+  {
+    "$schema": "https://extensions.shopifycdn.com/shopifycloud/schemas/v1/tool.json",
+    "name": "design_email",
+    "description": "Stage changes to the email copy for the campaign currently open in the form — subject, preview text, and/or body copy. Stages into the form only; the merchant reviews and clicks Create/Save/Send.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "description": "New subject line",
+          "maxLength": 200
+        },
+        "previewText": {
+          "type": "string",
+          "description": "New inbox preview text",
+          "maxLength": 200
+        },
+        "body": {
+          "type": "string",
+          "description": "New email body copy"
+        }
+      }
+    }
+  }
+]

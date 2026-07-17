@@ -42,7 +42,6 @@ export default function EditCampaign() {
       actionPath={`/app/campaigns/${id}/edit`}
       heading={`Edit: ${campaign.name}`}
       successMessage="Campaign saved (demo)"
-      enableDesignTool
     />
   );
 }

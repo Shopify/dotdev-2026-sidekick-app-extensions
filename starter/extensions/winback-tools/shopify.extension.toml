@@ -8,7 +8,7 @@ type = "ui_extension"
 uid = "4d455331-4620-428e-c7e0-a7ad548fde8d2f93be2c"
 # Build 1 (Step 2) tightens this description so Sidekick knows when to
 # use the tool. Keep it vague for now — that's part of the lesson.
-description = "Tools for this app"
+description = "Find customers who have not ordered in a given number of days. Use when the merchant wants to identify lapsed customers or plan a win-back campaign."
 
 [[extensions.targeting]]
 module = "./src/index.js"

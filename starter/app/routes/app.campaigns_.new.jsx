@@ -52,7 +52,6 @@ export default function NewCampaign() {
       heading="Create campaign"
       saveLabel="Create"
       successMessage="Campaign created (demo)"
-      enableDesignTool
     />
   );
 }

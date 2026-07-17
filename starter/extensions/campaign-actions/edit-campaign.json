@@ -1,0 +1,31 @@
+{
+  "$schema": "https://extensions.shopifycdn.com/shopifycloud/schemas/v1/intent.json",
+  "value": {
+    "type": "string",
+    "description": "The id of the campaign to edit. Sidekick may pass a gid://application/campaign/<id> resource URI; Admin strips it to the bare id before substituting {id}.",
+    "mapTo": "param",
+    "fieldName": "id"
+  },
+  "inputSchema": {
+    "$ref": "https://extensions.shopifycdn.com/shopifycloud/schemas/v1/application/campaign.json",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Campaign name",
+        "maxLength": 200
+      },
+      "status": {
+        "type": "string",
+        "description": "Campaign status"
+      },
+      "customerIds": {
+        "type": "array",
+        "description": "Customer ids included in this campaign",
+        "items": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

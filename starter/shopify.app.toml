@@ -14,7 +14,7 @@ embedded = true
 # workshop rewrites it to name the actions (find/create) and the domain
 # (lapsed customers, win-back email campaigns). 256-token limit.
 [sidekick]
-extensions_summary = "Tools for this app."
+extensions_summary = "Find lapsed customers for email marketing and win-back campaign planning."
 
 [access_scopes]
 # The workshop app serves its data from its own backend (app/data/*), so it
