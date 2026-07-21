@@ -3,12 +3,13 @@
 A minimal, embedded **email-marketing app** built on the Shopify
 [React Router app template](https://github.com/Shopify/shopify-app-template-react-router).
 It ships with everything you need to start the DotDev Sidekick workshop at the
-exercise — not at "install Node."
+exercise."
 
-You **hand-build** the two extensions during the workshop and
+You build the two extensions during the workshop using the prompts in
+[`../prompts/`](../prompts), and
 test them through Sidekick on a dev store. A complete reference solution is on
 the
-[`finished`](https://github.com/shopify-playground/dotdev-2026-sidekick-app-extensions/tree/finished)
+[`finished`](https://github.com/Shopify/dotdev-2026-sidekick-app-extensions/tree/finished)
 branch.
 
 ## What's in here
@@ -77,4 +78,5 @@ If the placeholder `client_id` blocks linking, run `shopify app dev --reset`.
 > Open the dev store directly in the browser (the `p` CLI shortcut isn't
 > supported for Sidekick extensions yet).
 
-Then start **Build 1** — hand-build `find_lapsed_customers`.
+Then start **Build 1** — hand-build `find_lapsed_customers`, or use the shortcut
+in [`../prompts/01-expose-data-extension.md`](../prompts/01-expose-data-extension.md).

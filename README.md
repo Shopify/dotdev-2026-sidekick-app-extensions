@@ -16,9 +16,8 @@ By the end you'll have, running against your own dev store:
 - an **action extension** that chains a data result into a merchant-confirmed
   edit: Sidekick opens a pre-filled win-back campaign; the merchant sends it.
 
-You'll build both extensions live, step by step. That's the goal of
-the session! A complete reference solution lives on the
-[`finished`](https://github.com/shopify/dotdev-2026-sidekick-app-extensions/tree/finished)
+You'll build both extensions live, step by step. Each step has a matching prompt in [`prompts/`](prompts) which contain code snippets you can copy to follow along. You can also hand the full prompt to an AI coding assistant to accelarate the same result.  A complete reference solution lives on the
+[`finished`](https://github.com/Shopify/dotdev-2026-sidekick-app-extensions/tree/finished)
 branch. You test everything through Sidekick on a dev store.
 
 ## Prerequisites
@@ -67,8 +66,7 @@ Shopify CLI may create local state such as `.shopify/` and
 
 ## How the workshop runs
 
-You build in **two parts**, live. Code along with each step. Keep a terminal open with
-`shopify app dev --use-localhost` running to see your changes update live.
+You build in **two parts**, live. Hand-code each step using the code snippets in the [`prompts/`](prompts) or use the full prompts with an AI assistant. Keep a terminal open with `shopify app dev --use-localhost` running to see your changes update live.
 
 ### Part 1 — App data: give Sidekick something to answer *and act on*
 
@@ -76,11 +74,11 @@ Turn `winback-tools` from a placeholder into a data extension that answers the
 lookup, is legible to the agent, and returns a `resource_link` Sidekick can carry
 forward.
 
-| Step | You build |
-|---|---|
-| Expose a capability, hit the ceiling | `find_lapsed_customers` — Sidekick answers the lookup but stalls on the goal |
-| Make it legible to the agent | tighten `extensions_summary`, the extension `description`, and `instructions.md` so Sidekick selects it unprompted |
-| Shape the payload | `find_campaigns` returns campaign `resource_link` results (stable `uri`, matching `mimeType`, compact `_meta`) |
+| Step | Prompt (shortcut) | You build |
+|---|---|---|
+| Expose a capability, hit the ceiling | [`01`](prompts/01-expose-data-extension.md) | `find_lapsed_customers` — Sidekick answers the lookup but stalls on the goal |
+| Make it legible to the agent | [`02`](prompts/02-make-capability-legible.md) | tighten `extensions_summary`, the extension `description`, and `instructions.md` so Sidekick selects it unprompted |
+| Shape the payload | [`03`](prompts/03-shape-payload-for-composition.md) | `find_campaigns` returns campaign `resource_link` results (stable `uri`, matching `mimeType`, compact `_meta`) |
 
 ### Part 2 — App actions: let Sidekick chain question → action
 
@@ -89,14 +87,14 @@ campaign pages pre-filled — edit first, then create, then the full win-back fl
 The action's intent `type` (`application/campaign`) matches the data result's
 `mimeType`; that match is the join key.
 
-| Step | You build |
-|---|---|
-| Compose into an edit action | create the `campaign-actions` folder + `open-campaign` edit action and register `design_email` in the editor route; Sidekick opens the pre-filled campaign and stages edits — the merchant reviews and sends |
-| Add a create action | add `create-campaign` (`create:application/campaign` → `/app/campaigns/new`) to the same shared folder |
-| Compose the win-back end to end | update instructions so Sidekick runs the full flow: find lapsed → check/edit or create → stage email with `design_email` → merchant sends |
+| Step | Prompt (shortcut) | You build |
+|---|---|---|
+| Compose into an edit action | [`04`](prompts/04-compose-into-action.md) | create the `campaign-actions` folder + `open-campaign` edit action and register `design_email` in the editor route; Sidekick opens the pre-filled campaign and stages edits — the merchant reviews and sends |
+| Add a create action | [`05`](prompts/05-create-campaign-action.md) | add `create-campaign` (`create:application/campaign` → `/app/campaigns/new`) to the same shared folder |
+| Compose the win-back end to end | [`06`](prompts/06-create-winback-campaign-end-to-end.md) | update instructions so Sidekick runs the full flow: find lapsed → check/edit or create → stage email with `design_email` → merchant sends |
 
 **Reference solution:** the
-[`finished`](https://github.com/shopify/dotdev-2026-sidekick-app-extensions/tree/finished)
+[`finished`](https://github.com/Shopify/dotdev-2026-sidekick-app-extensions/tree/finished)
 branch has both builds complete; `main` is the starter you build from.
 
 See [`starter/README.md`](starter/README.md) for the app layout and the one
@@ -104,7 +102,7 @@ cross-origin seam to verify on a dev store.
 
 ## Bringing your own app
 
-The moves here transfer directly to your own app: expose a tool,
+The prompts assume this starter, but the moves transfer directly: expose a tool,
 make its description and instructions legible to the model, return a
 `resource_link` whose `mimeType` matches an action intent's `type`, and wire the
 action. Where a step references a starter file (an endpoint or a route path),
@@ -120,6 +118,7 @@ map it to the equivalent in your app.
 
 **In this repo**
 
+- [`prompts/`](prompts) — the six staged build prompts (three per part of the session).
 - [`starter/README.md`](starter/README.md) — app layout, the two extensions, and the one cross-origin seam to verify on a dev store.
 
 **Also useful**
