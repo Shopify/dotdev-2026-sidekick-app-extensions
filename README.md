@@ -1,9 +1,9 @@
 # DotDev 2026: Add a Sidekick extension to your app in 60 minutes
 
-This repository is the starter project for the DotDev 2026 **Sidekick app
+This repository is the starter project for the [DotDev]([url](https://dotdev.shopify.com/)) 2026 **Sidekick app
 extensions** workshop.
 
-Merchants now bring **Sidekick** a goal and it composes a plan across their
+Merchants now bring **Sidekick** a _goal_ and it composes a plan across their
 apps. In this workshop you'll take an app capability that answers a single
 lookup and redesign it into something Sidekick can **compose** into a merchant's
 goal: *"help me win back customers who haven't ordered in 90 days."*
@@ -14,11 +14,11 @@ By the end you'll have, running against your own dev store:
 - a payload it can **act on** (a `resource_link` with a stable `uri`, a matching
   `mimeType`, and `_meta`), and
 - an **action extension** that chains a data result into a merchant-confirmed
-  edit — Sidekick opens a pre-filled win-back campaign; the merchant sends it.
+  edit: Sidekick opens a pre-filled win-back campaign; the merchant sends it.
 
-You'll **hand-build** both extensions live, step by step — that's the point of
-the session. A complete reference solution lives on the
-[`finished`](https://github.com/shopify-playground/dotdev-2026-sidekick-app-extensions/tree/finished)
+You'll build both extensions live, step by step. That's the goal of
+the session! A complete reference solution lives on the
+[`finished`](https://github.com/shopify/dotdev-2026-sidekick-app-extensions/tree/finished)
 branch. You test everything through Sidekick on a dev store.
 
 ## Prerequisites
@@ -34,7 +34,8 @@ Before the workshop, make sure you have:
   (**npm** or **pnpm**).
 - A code editor and an **AI coding assistant** with the Shopify Dev MCP server
   configured (`starter/.vscode/mcp.json` / `starter/.mcp.json`).
-- Comfort building Shopify apps — this is a 200/300-level session and assumes
+- The [Shopify Dev MCP server](https://shopify.dev/docs/apps/build/devmcp) connected to your AI coding assistant
+- Comfort building Shopify apps. This is a 200/300-level session and assumes
   you've shipped at least one app or extension.
 
 ## Get ready
@@ -43,10 +44,13 @@ Clone this repo, then start from the app in `starter/`:
 
 ```bash
 cd starter
-npm install          # or: pnpm install
+npm install
 shopify app dev --reset
 shopify app dev --use-localhost
 ```
+
+> [!NOTE]
+> You can use `pnpm` instead of `npm`, if you prefer.
 
 `--reset` creates a fresh app and a linked `shopify.app.<name>.toml`, so everyone
 starts from a clean, consistent environment. **Before you run `dev`, delete any
@@ -55,7 +59,7 @@ are the most common cause of the tunnel failing to initialize.
 
 Link the app to your Partner org and select your Sidekick dev store, then confirm
 the embedded app loads with the seeded audience and campaigns. If the app shows
-`example.com` or fails to load on first boot, refresh the page — that's expected
+`example.com` or fails to load on first boot, please refresh the page. That's expected
 CLI tunnel behavior on startup.
 
 Shopify CLI may create local state such as `.shopify/` and
@@ -63,7 +67,7 @@ Shopify CLI may create local state such as `.shopify/` and
 
 ## How the workshop runs
 
-You build in **two parts**, live. Hand-code each step. Keep a terminal open with
+You build in **two parts**, live. Code along with each step. Keep a terminal open with
 `shopify app dev --use-localhost` running to see your changes update live.
 
 ### Part 1 — App data: give Sidekick something to answer *and act on*
@@ -92,7 +96,7 @@ The action's intent `type` (`application/campaign`) matches the data result's
 | Compose the win-back end to end | update instructions so Sidekick runs the full flow: find lapsed → check/edit or create → stage email with `design_email` → merchant sends |
 
 **Reference solution:** the
-[`finished`](https://github.com/shopify-playground/dotdev-2026-sidekick-app-extensions/tree/finished)
+[`finished`](https://github.com/shopify/dotdev-2026-sidekick-app-extensions/tree/finished)
 branch has both builds complete; `main` is the starter you build from.
 
 See [`starter/README.md`](starter/README.md) for the app layout and the one
